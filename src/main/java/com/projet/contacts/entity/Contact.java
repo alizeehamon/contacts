@@ -208,7 +208,7 @@ public class Contact {
         this.contactsImRelatedTo = contactsImRelatedTo;
     }
 
-    public ContactDTO toDTO() {
+    public ContactDTO toDTO(boolean isForEdit) {
         ContactDTO contactDTO = new ContactDTO();
         contactDTO.setId(this.getId());
         contactDTO.setFirstName(this.getFirstName());
@@ -225,7 +225,9 @@ public class Contact {
         contactDTO.setCompanyRole(this.getCompanyRole());
         contactDTO.setEncounterSummary(this.getEncounterSummary());
         contactDTO.setWebSite(this.getWebSite());
-        contactDTO.setImageUrl(this.getImage());
+        if(!isForEdit) {
+            contactDTO.setImageUrl(this.getImage());
+        }
         return contactDTO;
     }
 }

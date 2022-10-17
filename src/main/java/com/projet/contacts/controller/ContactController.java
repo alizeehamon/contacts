@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.awt.print.Book;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -44,7 +45,7 @@ public class ContactController {
 
     @GetMapping("/delete/{id}")
     public String displayDeleteForm(Model model, @PathVariable Long id) {
-        ContactDTO contactDTO = contactService.findContactById(id);
+        ContactDTO contactDTO = contactService.findContactById(id, false);
         model.addAttribute("contact", contactDTO);
         return "deleteContact";
     }
@@ -52,6 +53,20 @@ public class ContactController {
     @PostMapping("/delete/{id}")
     public String removeBook(@PathVariable Long id) {
         contactService.delete(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String displayEditForm(Model model, @PathVariable Long id) {
+       ContactDTO contactDTO = contactService.findContactById(id, true);
+        model.addAttribute("contact", contactDTO);
+        return "editContact";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editBook(ContactDTO contactDTO, Model model, @PathVariable Long id) {
+        model.addAttribute("contact", contactDTO);
+        contactService.edit(id, contactDTO);
         return "redirect:/";
     }
 }
