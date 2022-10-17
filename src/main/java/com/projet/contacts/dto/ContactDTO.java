@@ -1,17 +1,14 @@
-package com.projet.contacts.entity;
+package com.projet.contacts.dto;
 
-import com.projet.contacts.dto.ContactDTO;
+import com.projet.contacts.entity.Contact;
+import com.projet.contacts.uploadingfile.service.FileSystemStorageService;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-public class Contact {
+public class ContactDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -22,7 +19,9 @@ public class Contact {
 
     private String email;
 
-    private String image;
+    private MultipartFile image;
+
+    private String imageUrl;
 
     private String address1;
 
@@ -34,7 +33,7 @@ public class Contact {
 
     private String country;
 
-    private LocalDate birthdate;
+    private String birthdate;
 
     private String encounterSummary;
 
@@ -44,16 +43,9 @@ public class Contact {
 
     private String webSite;
 
-    @ManyToOne
-    private User user;
+    private String note;
 
-    @OneToMany(mappedBy = "targetContact")
-    private List<Relationship> contactsRelatedToMe;
-
-    @OneToMany(mappedBy = "transmitterContact")
-    private List<Relationship> contactsImRelatedTo;
-
-    public Contact() {
+    public ContactDTO() {
     }
 
     public Long getId() {
@@ -96,12 +88,20 @@ public class Contact {
         this.email = email;
     }
 
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getAddress1() {
@@ -144,11 +144,11 @@ public class Contact {
         this.country = country;
     }
 
-    public LocalDate getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -184,50 +184,38 @@ public class Contact {
         this.webSite = webSite;
     }
 
-    public User getUser() {
-        return user;
+    public String getNote() {
+        return note;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setNote(String note) {
+        this.note = note;
     }
 
-    public List<Relationship> getContactsRelatedToMe() {
-        return contactsRelatedToMe;
-    }
-
-    public void setContactsRelatedToMe(List<Relationship> contactsRelatedToMe) {
-        this.contactsRelatedToMe = contactsRelatedToMe;
-    }
-
-    public List<Relationship> getContactsImRelatedTo() {
-        return contactsImRelatedTo;
-    }
-
-    public void setContactsImRelatedTo(List<Relationship> contactsImRelatedTo) {
-        this.contactsImRelatedTo = contactsImRelatedTo;
-    }
-
-    public ContactDTO toDTO(boolean isForEdit) {
-        ContactDTO contactDTO = new ContactDTO();
-        contactDTO.setId(this.getId());
-        contactDTO.setFirstName(this.getFirstName());
-        contactDTO.setLastName(this.getLastName());
-        contactDTO.setPhone(this.getPhone());
-        contactDTO.setEmail(this.getEmail());
-        contactDTO.setAddress1(this.getAddress1());
-        contactDTO.setAddress2(this.getAddress2());
-        contactDTO.setZipCode(this.getZipCode());
-        contactDTO.setCity(this.getCity());
-        contactDTO.setCountry(this.getCountry());
-        contactDTO.setBirthdate(String.valueOf(this.getBirthdate()));
-        contactDTO.setCompany(this.getCompany());
-        contactDTO.setCompanyRole(this.getCompanyRole());
-        contactDTO.setEncounterSummary(this.getEncounterSummary());
-        contactDTO.setWebSite(this.getWebSite());
-        if(!isForEdit) {
-            contactDTO.setImageUrl(this.getImage());
+    public Contact toContact(){
+        Contact contact = new Contact();
+        contact.setFirstName(this.getFirstName());
+        contact.setLastName(this.getLastName());
+        contact.setPhone(this.getPhone());
+        contact.setEmail(this.getEmail());
+        contact.setAddress1(this.getAddress1());
+        contact.setAddress2(this.getAddress2());
+        contact.setZipCode(this.getZipCode());
+        contact.setCity(this.getCity());
+        contact.setCountry(this.getCountry());
+        contact.setBirthdate(LocalDate.parse(this.getBirthdate()));
+        contact.setCompany(this.getCompany());
+        contact.setCompanyRole(this.getCompanyRole());
+        contact.setEncounterSummary(this.getEncounterSummary());
+        contact.setWebSite(this.getWebSite());
+        MultipartFile picture = this.getImage();
+        try {
+            FileSystemStorageService fileService = new FileSystemStorageService();
+            fileService.store(picture);
+            contact.setImage("http://localhost:8080/images/" + picture.getOriginalFilename());
+        }catch(IOException e){
+            e.printStackTrace();
         }
-        return contactDTO;
+        return contact;
     }
 }

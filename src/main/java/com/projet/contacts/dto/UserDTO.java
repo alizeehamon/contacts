@@ -1,29 +1,26 @@
-package com.projet.contacts.entity;
+package com.projet.contacts.dto;
 
-import javax.persistence.*;
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
-public class User {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserDTO {
+
     private long id;
 
     private String firstName;
 
     private String lastName;
-
+    @NotNull
     private String email;
-
+    @NotNull
+    @Size(min = 5, message = "password must be longer than 5 characters")
     private String password;
 
-    private String imageUrl;
+    private String image;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Contact> contactList;
-
-    public User() {
+    public UserDTO() {
     }
 
     public long getId() {
@@ -66,19 +63,11 @@ public class User {
         this.password = password;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public List<Contact> getContactList() {
-        return contactList;
-    }
-
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+    public void setImage(String image) {
+        this.image = image;
     }
 }
