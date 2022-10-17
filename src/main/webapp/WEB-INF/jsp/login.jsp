@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign in</title>
 </head>
-<body>
+<body class="bg-light">
 <jsp:include page="header.jsp"></jsp:include>
 <h2 class="text-center mt-3">Sign in</h2>
 <div class="container mt-3">

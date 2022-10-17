@@ -11,7 +11,7 @@
     <link href="../../resources/static/css/style.css" rel="stylesheet"/>
     <title>My contacts</title>
 </head>
-<body>
+<body class="bg-light">
 <jsp:include page="header.jsp"></jsp:include>
 <div class="container mt-2 bg-light p-2 rounded">
     <div class="row align-items-center">

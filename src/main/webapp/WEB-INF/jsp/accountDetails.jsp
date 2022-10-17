@@ -9,15 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Sign up</title>
+    <title>Edit my account</title>
 
 </head>
 <body class="bg-light">
 <jsp:include page="header.jsp"></jsp:include>
-<h2 class="text-center mt-3">Create an account</h2>
+<h2 class="text-center mt-3">Edit my account</h2>
 <div class="container mt-3">
 
-    <form:form action="${pageContext.request.contextPath}/register" method="post" modelAttribute="userDTO">
+    <form:form action="${pageContext.request.contextPath}/account" method="post" modelAttribute="userDTO">
 
         <div class="mb-3">
             <label class="form-label" for="lastName">Lastname</label>
@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label class="form-label" for="image">Profile picture</label>
-            <form:input type="image" class="form-control" id="image" placeholder="Enter a profile picture url" path="image" required="true"/>
+            <form:input type="text" class="form-control" id="image" placeholder="Enter a profile picture url" path="image" required="true"/>
                 <%--        <form:errors path="image" cssClass="alert alert-danger"></form:errors>--%>
         </div>
 

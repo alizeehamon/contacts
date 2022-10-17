@@ -9,6 +9,7 @@
     <title>Add a contact</title>
 </head>
 <jsp:include page="header.jsp"></jsp:include>
+<body class="bg-light">
 <h2 class="text-center mt-3">Edit a Contact</h2>
 <div class="container mt-3">
     <form method="post" action="${pageContext.request.contextPath}/edit/${contact.id}" enctype="multipart/form-data">
