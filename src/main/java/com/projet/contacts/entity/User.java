@@ -20,7 +20,7 @@ public class User {
 
     private String imageUrl;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Contact> contactList;
 
     public User() {

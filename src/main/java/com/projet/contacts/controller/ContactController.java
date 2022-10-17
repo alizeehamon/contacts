@@ -2,8 +2,11 @@ package com.projet.contacts.controller;
 
 import com.projet.contacts.dto.ContactDTO;
 import com.projet.contacts.entity.Contact;
+import com.projet.contacts.entity.User;
 import com.projet.contacts.service.ContactService;
+import com.projet.contacts.service.UserService;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,17 +24,22 @@ import java.util.stream.Collectors;
 public class ContactController {
 
     private final ContactService contactService;
+    private final UserService userService;
 
-    public ContactController(ContactService contactService) {
+    public ContactController(ContactService contactService, UserService userService) {
         this.contactService = contactService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
-    public String displayContacts(Model model, @Param("contactName") String contactName){
-        List<ContactDTO> contacts = contactService.searchContacts(contactName);
+    public String displayContacts(Authentication authentication, Model model, @Param("contactName") String contactName){
+        User user = userService.getCurrentUser(authentication.getName());
+        List<ContactDTO> contacts = contactService.searchContactsByUserId(contactName, user);
         model.addAttribute("contacts", contacts);
         model.addAttribute("contactName", contactName);
         return "contacts";
+
+
     }
 
     @GetMapping("/add")

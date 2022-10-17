@@ -47,7 +47,7 @@
 
         <div class="mb-3">
             <label class="form-label" for="image">Profile picture</label>
-            <form:input type="image" class="form-control" id="image" placeholder="Enter a profile picture url" path="image" required="true"/>
+            <form:input type="text" class="form-control" id="image" placeholder="Enter a profile picture url" path="image" required="true"/>
                 <%--        <form:errors path="image" cssClass="alert alert-danger"></form:errors>--%>
         </div>
 
