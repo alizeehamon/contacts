@@ -33,9 +33,10 @@
                     <li class="nav-item">
                         <a
                                 class="nav-link text-white"
-                                href="#"
-                                target="_blank"
-                        >More</a
+                                href="${pageContext.request.contextPath}/account"
+                        ><sec:authorize access="isAuthenticated()">
+                            <sec:authentication property="principal.username" />
+                        </sec:authorize></a
                         >
                     </li>
                     <sec:authorize access="!isAuthenticated()">
@@ -56,12 +57,6 @@
                                 </button>
                             </form:form>
                         </sec:authorize>
-                        <%--<form action="/logout" method="post">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <button class="nav-link text-white border-none" type="submit"
-                                    style="background-color: rgba(0, 0, 0, 0.8); line-height: normal">Logout
-                            </button>
-                        </form>--%>
                     </li>
                 </ul>
             </div>

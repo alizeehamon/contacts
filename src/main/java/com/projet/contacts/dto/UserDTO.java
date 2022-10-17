@@ -1,5 +1,7 @@
 package com.projet.contacts.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -7,12 +9,16 @@ public class UserDTO {
 
     private long id;
 
-    private String username;
+    private String firstName;
+
+    private String lastName;
     @NotNull
     private String email;
     @NotNull
     @Size(min = 5, message = "password must be longer than 5 characters")
     private String password;
+
+    private String image;
 
     public UserDTO() {
     }
@@ -25,12 +31,20 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -47,5 +61,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

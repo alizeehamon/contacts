@@ -11,7 +11,7 @@
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Add a book</title>
 </head>
-<body>
+<body class="bg-light">
 <jsp:include page="header.jsp"></jsp:include>
 <h2 class="text-center mt-3">Are you sure you want to delete ${contact.firstName} ${contact.lastName} ?</h2>
 <div class="container mt-3">
