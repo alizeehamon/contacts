@@ -1,7 +1,10 @@
 package com.projet.contacts.dto;
 
+import com.projet.contacts.entity.Contact;
+import com.projet.contacts.uploadingfile.service.FileSystemStorageService;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class ContactDTO {
@@ -30,7 +33,7 @@ public class ContactDTO {
 
     private String country;
 
-    private LocalDate birthdate;
+    private String birthdate;
 
     private String encounterSummary;
 
@@ -141,11 +144,11 @@ public class ContactDTO {
         this.country = country;
     }
 
-    public LocalDate getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -187,5 +190,32 @@ public class ContactDTO {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Contact toDto(){
+        Contact contact = new Contact();
+        contact.setFirstName(this.getFirstName());
+        contact.setLastName(this.getLastName());
+        contact.setPhone(this.getPhone());
+        contact.setEmail(this.getEmail());
+        contact.setAddress1(this.getAddress1());
+        contact.setAddress2(this.getAddress2());
+        contact.setZipCode(this.getZipCode());
+        contact.setCity(this.getCity());
+        contact.setCountry(this.getCountry());
+        contact.setBirthdate(LocalDate.parse(this.getBirthdate()));
+        contact.setCompany(this.getCompany());
+        contact.setCompanyRole(this.getCompanyRole());
+        contact.setEncounterSummary(this.getEncounterSummary());
+        contact.setWebSite(this.getWebSite());
+        MultipartFile picture = this.getImage();
+        try {
+            FileSystemStorageService fileService = new FileSystemStorageService();
+            fileService.store(picture);
+            contact.setImage("http://localhost:8080/images/" + picture.getOriginalFilename());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return contact;
     }
 }

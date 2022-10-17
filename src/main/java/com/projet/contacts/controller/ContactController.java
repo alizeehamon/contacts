@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,8 @@ public class ContactController {
     }
 
     @PostMapping("/add")
-    public void createContact(ContactDTO contactDTO){
-
+    public String createContact(ContactDTO contactDTO) {
+        contactService.addContact(contactDTO);
+        return "redirect:/";
     }
 }
