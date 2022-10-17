@@ -42,7 +42,7 @@
                     <li class="nav-item">
                         <form:form action="/login" method="post">
                         <button class="nav-link text-white border-none" type="submit"
-                                style="background-color: #040404; line-height: normal">
+                                style="background-color: #1D1D1D; line-height: normal">
                             Login
                         </button>
                         </form:form>
@@ -51,7 +51,7 @@
                         <sec:authorize access="isAuthenticated()">
                             <form:form action="/logout" method="post">
                                 <button class="nav-link text-white border-none" type="submit"
-                                        style="background-color: #040404; line-height: normal">
+                                        style="background-color: #1D1D1D; line-height: normal">
                                     Logout
                                 </button>
                             </form:form>
