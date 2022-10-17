@@ -2,6 +2,7 @@ package com.projet.contacts.service;
 
 import com.projet.contacts.dto.ContactDTO;
 import com.projet.contacts.entity.Contact;
+import com.projet.contacts.entity.User;
 import com.projet.contacts.repository.ContactRepository;
 import com.projet.contacts.uploadingfile.service.FileSystemStorageService;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,6 @@ public class ContactService {
         this.contactRepository = contactRepository;
     }
 
-
-    public List<ContactDTO> findAllContacts() {
-        List<Contact> contactList = (List<Contact>) contactRepository.findAll();
-        return contactList.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
-    }
 
     public void addContact(ContactDTO contactDTO) {
         contactRepository.save(contactDTO.toDto());
@@ -78,12 +74,12 @@ public class ContactService {
         contactOpt.orElseThrow(() -> new NoSuchElementException("Contact not found to edit with the id " + contactDTO.getId()));
     }
 
-    public List<ContactDTO> searchContacts(String contactName) {
+    public List<ContactDTO> searchContactsByUserId(String contactName, User user) {
         if (contactName != null) {
-            List<Contact> contactList = this.contactRepository.findAllByName(contactName);
-            return contactList.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
+            List<Contact> contacts = this.contactRepository.findAllByNameAndUserId(contactName, user);
+            return contacts.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
         }
-        List<Contact> contactList = (List<Contact>) contactRepository.findAll();
-        return contactList.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
+        List<Contact> contacts = this.contactRepository.findAllByUserId(user);
+        return contacts.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
     }
 }
