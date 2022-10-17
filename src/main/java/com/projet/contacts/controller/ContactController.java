@@ -3,6 +3,7 @@ package com.projet.contacts.controller;
 import com.projet.contacts.dto.ContactDTO;
 import com.projet.contacts.entity.Contact;
 import com.projet.contacts.service.ContactService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,10 @@ public class ContactController {
     }
 
     @GetMapping("/")
-    public String displayContacts(Model model){
-        List<ContactDTO> contacts = contactService.findAllContacts();
+    public String displayContacts(Model model, @Param("contactName") String contactName){
+        List<ContactDTO> contacts = contactService.searchContacts(contactName);
         model.addAttribute("contacts", contacts);
+        model.addAttribute("contactName", contactName);
         return "contacts";
     }
 

@@ -23,7 +23,12 @@
         <div class="col-md-6">
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                 <div>
-                    SEARCH BAR A METTRE
+                    <form class="d-flex" action="${pageContext.request.contextPath}/">
+                        <input class="form-control me-2 w-30" type="search" placeholder="type a name (first or last)" name="contactName"
+                               aria-label="Search" value="${contactName}">
+                        <button class="btn btn-outline-success m-1" type="submit">Search</button>
+                        <button class="btn btn-outline-danger m-1" type="button" onclick="clearSearch()">Clear</button>
+                    </form>
                 </div>
                 <div>
                     <a href="${pageContext.request.contextPath}/add" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Add New</a>
@@ -78,5 +83,10 @@
     </div>
     </div>
 </div>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "${pageContext.request.contextPath}/";
+    }
+</script>
 </body>
 </html>

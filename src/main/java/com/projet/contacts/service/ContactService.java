@@ -77,4 +77,13 @@ public class ContactService {
         }
         contactOpt.orElseThrow(() -> new NoSuchElementException("Contact not found to edit with the id " + contactDTO.getId()));
     }
+
+    public List<ContactDTO> searchContacts(String contactName) {
+        if (contactName != null) {
+            List<Contact> contactList = this.contactRepository.findAllByName(contactName);
+            return contactList.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
+        }
+        List<Contact> contactList = (List<Contact>) contactRepository.findAll();
+        return contactList.stream().map(c -> c.toDTO(false)).collect(Collectors.toList());
+    }
 }
