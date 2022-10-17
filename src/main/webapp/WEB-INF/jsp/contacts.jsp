@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<div class="container mt-2">
+<div class="container mt-2 bg-light p-2 rounded">
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
@@ -54,7 +54,7 @@
                             <th scope="row" class="ps-4">
                                 <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck1" /><label class="form-check-label" for="contacusercheck1"></label></div>
                             </th>
-                            <td><img src="${contact.imageUrl}" alt="avatar" class="avatar-sm rounded-circle me-2" />${contact.firstName} ${contact.lastName}</td>
+                            <td><img src="${contact.imageUrl}" alt="avatar" class="avatar-sm rounded-circle me-2" /> <a href="#" class="text-body">${contact.firstName} ${contact.lastName}</a></td>
                             <td><span class="badge badge-soft-success mb-0">${contact.address1} - ${contact.zipCode} ${contact.city}</span></td>
                             <td>${contact.email}</td>
                             <td>${contact.phone}</td>
