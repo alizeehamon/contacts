@@ -8,7 +8,6 @@ import com.projet.contacts.uploadingfile.service.FileSystemStorageService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Book;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,14 +25,21 @@ public class ContactService {
     }
 
 
-    public void addContact(ContactDTO contactDTO) {
-        contactRepository.save(contactDTO.toDto());
+    public void addContact(ContactDTO contactDTO, User user) {
+        Contact contact = contactDTO.toContact();
+        contact.setUser(user);
+        contactRepository.save(contact);
     }
 
     public void delete(Long id) {
         Optional<Contact> contactOpt = this.contactRepository.findById(id);
         contactOpt.ifPresent(contact -> this.contactRepository.delete(contact));
         contactOpt.orElseThrow(() -> new NoSuchElementException("Contact not found to delete with the id " + id));
+    }
+
+    public Contact findContactById(Long id) {
+        Optional<Contact> contactOpt = this.contactRepository.findById(id);
+        return contactOpt.orElseThrow(() -> new NoSuchElementException("Contact not found with the id " + id));
     }
 
     public ContactDTO findContactById(Long id, boolean isForEdit) {

@@ -17,6 +17,7 @@
 <div class="container mt-3">
     <form method="post" action="${pageContext.request.contextPath}/delete/${contact.id}">
         <div class="text-center mb-3">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input hidden name="contactId" value="${contact.id}">
             <button class="btn btn-primary mt-2" type="submit">Yes</button>
         </div>

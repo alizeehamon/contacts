@@ -76,7 +76,7 @@
             <label for="image" class="form-label">Picture of the contact</label>
             <input class="form-control" type="file" id="image" name="image">
         </div>
-
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="text-center mb-3">
             <button type="submit" class="btn btn-primary">Save the contact</button>
         </div>
