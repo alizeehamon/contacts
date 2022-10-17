@@ -1,17 +1,11 @@
-package com.projet.contacts.entity;
+package com.projet.contacts.dto;
 
-import com.projet.contacts.dto.ContactDTO;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-public class Contact {
+public class ContactDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -22,7 +16,9 @@ public class Contact {
 
     private String email;
 
-    private String image;
+    private MultipartFile image;
+
+    private String imageUrl;
 
     private String address1;
 
@@ -44,23 +40,16 @@ public class Contact {
 
     private String webSite;
 
-    @ManyToOne
-    private User user;
+    private String note;
 
-    @OneToMany(mappedBy = "targetContact")
-    private List<Relationship> contactsRelatedToMe;
-
-    @OneToMany(mappedBy = "transmitterContact")
-    private List<Relationship> contactsImRelatedTo;
-
-    public Contact() {
+    public ContactDTO() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,12 +85,20 @@ public class Contact {
         this.email = email;
     }
 
-    public String getImage() {
+    public MultipartFile getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(MultipartFile image) {
         this.image = image;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getAddress1() {
@@ -184,48 +181,11 @@ public class Contact {
         this.webSite = webSite;
     }
 
-    public User getUser() {
-        return user;
+    public String getNote() {
+        return note;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Relationship> getContactsRelatedToMe() {
-        return contactsRelatedToMe;
-    }
-
-    public void setContactsRelatedToMe(List<Relationship> contactsRelatedToMe) {
-        this.contactsRelatedToMe = contactsRelatedToMe;
-    }
-
-    public List<Relationship> getContactsImRelatedTo() {
-        return contactsImRelatedTo;
-    }
-
-    public void setContactsImRelatedTo(List<Relationship> contactsImRelatedTo) {
-        this.contactsImRelatedTo = contactsImRelatedTo;
-    }
-
-    public ContactDTO toDTO() {
-        ContactDTO contactDTO = new ContactDTO();
-        contactDTO.setId(this.getId());
-        contactDTO.setFirstName(this.getFirstName());
-        contactDTO.setLastName(this.getLastName());
-        contactDTO.setPhone(this.getPhone());
-        contactDTO.setEmail(this.getEmail());
-        contactDTO.setAddress1(this.getAddress1());
-        contactDTO.setAddress2(this.getAddress2());
-        contactDTO.setZipCode(this.getZipCode());
-        contactDTO.setCity(this.getCity());
-        contactDTO.setCountry(this.getCountry());
-        contactDTO.setBirthdate(this.getBirthdate());
-        contactDTO.setCompany(this.getCompany());
-        contactDTO.setCompanyRole(this.getCompanyRole());
-        contactDTO.setEncounterSummary(this.getEncounterSummary());
-        contactDTO.setWebSite(this.getWebSite());
-        contactDTO.setImageUrl(this.getImage());
-        return contactDTO;
+    public void setNote(String note) {
+        this.note = note;
     }
 }
