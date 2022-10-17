@@ -5,6 +5,7 @@ import com.projet.contacts.entity.Contact;
 import com.projet.contacts.repository.ContactRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,5 +22,9 @@ public class ContactService {
     public List<ContactDTO> findAllContacts() {
         List<Contact> contactList = (List<Contact>) contactRepository.findAll();
         return contactList.stream().map(c -> c.toDTO()).collect(Collectors.toList());
+    }
+
+    public void addContact(ContactDTO contactDTO) {
+        contactRepository.save(contactDTO.toDto());
     }
 }

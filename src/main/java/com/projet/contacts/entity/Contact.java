@@ -56,11 +56,11 @@ public class Contact {
     public Contact() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -220,7 +220,7 @@ public class Contact {
         contactDTO.setZipCode(this.getZipCode());
         contactDTO.setCity(this.getCity());
         contactDTO.setCountry(this.getCountry());
-        contactDTO.setBirthdate(this.getBirthdate());
+        contactDTO.setBirthdate(String.valueOf(this.getBirthdate()));
         contactDTO.setCompany(this.getCompany());
         contactDTO.setCompanyRole(this.getCompanyRole());
         contactDTO.setEncounterSummary(this.getEncounterSummary());

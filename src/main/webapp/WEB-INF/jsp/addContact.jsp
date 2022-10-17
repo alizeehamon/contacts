@@ -21,8 +21,12 @@
             <input type="text" class="form-control" id="lastName" placeholder="Jones" name="lastName">
         </div>
         <div class="mb-3">
-            <label class="form-label" for="email">Contact's Email</label>
+            <label class="form-label" for="email">Contact's email</label>
             <input type="email" class="form-control" id="email" placeholder="paul.jones@gmail.com" name="email">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="phone">Contact's phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="0671184953" name="phone">
         </div>
         <div class="mb-3">
             <label class="form-label" for="address1">Contact's address</label>
