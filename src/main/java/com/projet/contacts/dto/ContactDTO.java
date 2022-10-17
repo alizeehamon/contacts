@@ -192,7 +192,7 @@ public class ContactDTO {
         this.note = note;
     }
 
-    public Contact toDto(){
+    public Contact toContact(){
         Contact contact = new Contact();
         contact.setFirstName(this.getFirstName());
         contact.setLastName(this.getLastName());

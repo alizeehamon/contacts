@@ -43,9 +43,6 @@
                     <table class="table project-list-table table-nowrap align-middle table-borderless">
                         <thead>
                         <tr>
-                            <th scope="col" class="ps-4" style="width: 50px;">
-                                <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
-                            </th>
                             <th scope="col">Name</th>
                             <th scope="col">Address</th>
                             <th scope="col">Email</th>
@@ -56,10 +53,7 @@
                         <tbody>
                         <c:forEach items="${contacts}" var="contact">
                         <tr>
-                            <th scope="row" class="ps-4">
-                                <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck1" /><label class="form-check-label" for="contacusercheck1"></label></div>
-                            </th>
-                            <td><img src="${contact.imageUrl}" alt="avatar" class="avatar-sm rounded-circle me-2" /> <a href="#" class="text-body">${contact.firstName} ${contact.lastName}</a></td>
+                            <td><img src="${contact.imageUrl}" alt="avatar" class="avatar-sm rounded-circle me-2" /> <a href="${pageContext.request.contextPath}/see/${contact.id}" class="text-body">${contact.firstName} ${contact.lastName}</a></td>
                             <td><span class="badge badge-soft-success mb-0">${contact.address1} - ${contact.zipCode} ${contact.city}</span></td>
                             <td>${contact.email}</td>
                             <td>${contact.phone}</td>

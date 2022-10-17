@@ -1,5 +1,7 @@
 package com.projet.contacts.entity;
 
+import com.projet.contacts.dto.RelationDTO;
+
 import javax.persistence.*;
 
 @Entity
@@ -50,5 +52,13 @@ public class Relationship {
 
     public void setTargetContact(Contact targetContact) {
         this.targetContact = targetContact;
+    }
+
+    public RelationDTO toDto() {
+        RelationDTO dto = new RelationDTO();
+        dto.setIdTargetContact(this.targetContact.getId());
+        dto.setRelationType(this.relationType);
+        dto.setTargetContactName(this.targetContact.getFirstName().concat(" ").concat(this.targetContact.getLastName()));
+        return dto;
     }
 }
